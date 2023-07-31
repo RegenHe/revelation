@@ -1,14 +1,38 @@
 $(function () {
 
 	$.getJSON( "json/china.json" ).done(function ( response ) {
-
+		var $clickCallback = $( "#click-callback" );
 		jsMap.config( "#map-0", response, {
 			areaName: {
 				show: true
 			},
-			tip: function ( id, name ) {
-                return '<div style="background:#eee;padding:15px;"><p>id: ' + id + '</p><p>name: ' + name + '</p></div>';
-            }
+			clickCallback: function ( id, name ) {
+				const xhr = new XMLHttpRequest();
+				const url = 'query';
+				const data = {
+					"type" : "queryMap",
+					"provinceId": id,
+					"provinceName": name
+				};
+				xhr.open('POST', url);
+				xhr.setRequestHeader('Content-Type', 'application/json;charset=UTF-8');
+				xhr.send(JSON.stringify(data));
+				xhr.onload = function() {
+				if (xhr.status === 200) {
+					var json = JSON.parse(xhr.response);
+					console.log(json.data)
+					let p;
+					let msg = "";
+					for(p in json.data){
+						msg = msg + "<p>" + json.data[p].name + ", " + json.data[p].cityName + ", "+ json.data[p].describe + "</p>"
+					}
+					document.getElementById("show").innerHTML = msg;
+				} else {
+					console.log('Request failed.  Returned status of ' + xhr.status);
+					document.getElementById("show").innerHTML = 'Request failed.  Returned status of ' + xhr.status;
+				}
+				};
+			}
 		});
 /*
 		jsMap.config( "#map-01", response );
