@@ -4,7 +4,9 @@
 1. Pull Code
 ```
 git clone https://github.com/RegenHe/revelation.git
-git submodule add https://github.com/ithewei/libhv.git dep/libhv
+cd revelation
+git submodule init
+git submodule update
 ```
 2. Compile and Run
 ```
