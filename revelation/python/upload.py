@@ -76,7 +76,7 @@ class Controller:
 
     def queryAll(self):
         headers = {"Content-Type": "application/json;charset=utf8"}
-        url = "http://" + self.ip + ":" + self.port + "/queryAll"
+        url = "http://" + self.ip + ":" + str(self.port) + "/queryAll"
         data = {
             "type":"queryAllMap",
         }
@@ -85,7 +85,7 @@ class Controller:
 
     def remove(self, id):
         headers = {"Content-Type": "application/json;charset=utf8"}
-        url = "http://" + self.ip + ":" + self.port + "/remove"
+        url = "http://" + self.ip + ":" + str(self.port) + "/remove"
         data = {
             "type":"removeMap",
             "id": id
@@ -95,7 +95,7 @@ class Controller:
 
     def modify(self, id, provinceId, provinceName, cityeName, name, describe):
         headers = {"Content-Type": "application/json;charset=utf8"}
-        url = "http://" + self.ip + ":" + self.port + "/modify"
+        url = "http://" + self.ip + ":" + str(self.port) + "/modify"
         data = {
             "type":"modifyMap",
             "id": id,
