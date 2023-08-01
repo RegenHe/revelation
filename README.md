@@ -13,6 +13,6 @@ cd build
 cmake ..
 make
 
-cd ../html html
+mv ../html html
 ./revelation 8080 0.0.0.0
 ```
