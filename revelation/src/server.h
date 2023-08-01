@@ -6,12 +6,15 @@
 class MapHttpServer
 {
 public:
-    MapHttpServer(int port);
+    MapHttpServer(int port, std::string host);
 
     void registerMsg();
 
     int query(HttpRequest* req, HttpResponse* resp);
+    int queryAll(HttpRequest* req, HttpResponse* resp);
     int insert(HttpRequest* req, HttpResponse* resp);
+    int remove(HttpRequest* req, HttpResponse* resp);
+    int modify(HttpRequest* req, HttpResponse* resp);
 
     void start();
     void stop();
@@ -19,7 +22,7 @@ public:
 private:
     int m_port;
     hv::HttpService m_router;
-    hv::HttpServer m_server;
+    http_server_t m_server;
 
     SqliteOperator m_operator;
 

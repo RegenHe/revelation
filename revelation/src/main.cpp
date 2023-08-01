@@ -1,18 +1,19 @@
 #include <iostream>
-#include <hv/hv.h>
 #include <hv/HttpServer.h>
 
 #include "json.hpp"
 #include "server.h"
 
 
-using namespace hv;
-
-#define TEST_HTTPS 0
-
 int main(int argc, char** argv) {
-    MapHttpServer test(8080);
-	test.start();
+	if (argc < 3) {
+		printf("Usage: %s port and ip\n", argv[0]);
+		return -10;
+	}
+
+	int port = atoi(argv[1]);
+	std::string ip = argv[2];
+	MapHttpServer server(port, ip);
 
 #ifdef OS_UNIX
 	// daemon
@@ -22,17 +23,8 @@ int main(int argc, char** argv) {
 		printf("daemon error: %d\n", ret);
 		exit(-10);
 	}
-
-	while (1);
-#else
-	std::string str;
-	while (std::getline(std::cin, str)) {
-		if (str == "stop") {
-			test.stop();
-			break;
-		}
-	}
 #endif
+	server.start();
 
     return 0;
 }

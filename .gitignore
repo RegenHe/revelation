@@ -399,5 +399,6 @@ FodyWeavers.xsd
 
 # 
 test
+build
 *.db
 .vscode
