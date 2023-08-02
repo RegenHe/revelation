@@ -201,7 +201,7 @@ int MapHttpServer::remove(HttpRequest* req, HttpResponse* resp)
 		return response_status(resp, HTTP_STATUS_BAD_REQUEST);
 	}
 
-	int id = reqJson["id"];
+	int id = std::atoi(std::string(reqJson["id"]).c_str());;
 
 	std::string sql = "delete from t_user where id=" + std::to_string(id) + "; ";
 	resp->json["code"] = m_operator.Update(sql);
@@ -232,7 +232,7 @@ int MapHttpServer::modify(HttpRequest* req, HttpResponse* resp)
 		return response_status(resp, HTTP_STATUS_BAD_REQUEST);
 	}
 
-	int modifyId = reqJson["id"];
+	int modifyId = std::atoi(std::string(reqJson["id"]).c_str());
 	std::string provinceId = reqJson["provinceId"];
 	std::string provinceName = reqJson["provinceName"];
 	std::string cityeName = reqJson["cityeName"];

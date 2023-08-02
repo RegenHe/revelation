@@ -40,7 +40,7 @@ provinceNameMap = {
 }
 
 class Controller:
-    def __init__(self, ip="127.0.0.1", port=8080) -> None:
+    def __init__(self, ip="0.0.0.0", port=80) -> None:
         self.ip = ip
         self.port = port
 
@@ -110,6 +110,6 @@ class Controller:
 
 
 if __name__ == "__main__":
-    controller = Controller()
+    controller = Controller("127.0.0.1", 80)
 
     controller.start()
